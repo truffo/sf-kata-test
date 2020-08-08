@@ -15,4 +15,3 @@ modules:
             depends: Symfony
             cleanup: true
         - \App\Tests\Helper\Functional
-s
