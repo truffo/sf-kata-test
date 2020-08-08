@@ -1,8 +1,8 @@
 <?php namespace App\Tests\Core\Presentation\Action\Api;
 
+use App\Core\Application\Person\PersonServiceInterface;
+use App\Core\Domain\Person\Person;
 use App\Core\Presentation\Action\Api\Hello;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class HelloTest extends \Codeception\Test\Unit
@@ -23,7 +23,7 @@ class HelloTest extends \Codeception\Test\Unit
     // tests
     public function testHello()
     {
-        $service = $this->createMock(\App\Core\Application\Person\PersonServiceInterface::class);
+        $service = $this->createMock(PersonServiceInterface::class);
         $action = new Hello($service);
         $result = $action();
 
@@ -34,11 +34,11 @@ class HelloTest extends \Codeception\Test\Unit
 
     public function testHelloWithName()
     {
-        $service = $this->createMock(\App\Core\Application\Person\PersonServiceInterface::class);
+        $service = $this->createMock(PersonServiceInterface::class);
         $service
             ->expects($this->once())
             ->method('findByName')
-            ->willReturn(new \App\Core\Domain\Person\Person('Peter', 'Pan'));
+            ->willReturn(new Person('Peter', 'Pan'));
 
         $action = new Hello($service);
 
