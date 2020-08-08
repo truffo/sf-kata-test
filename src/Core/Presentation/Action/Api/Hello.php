@@ -6,7 +6,11 @@ namespace App\Core\Presentation\Action\Api;
 use App\Core\Application\Person\PersonServiceInterface;
 use App\Core\Application\Person\Query\FindByNameQuery;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route(path="/api/v1/hello/{name}", name="hello", methods="GET" )
+ */
 class Hello
 {
     private $personService;

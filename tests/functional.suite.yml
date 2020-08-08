@@ -14,4 +14,8 @@ modules:
         - Doctrine2:
             depends: Symfony
             cleanup: true
+        - REST:
+              url: http://localhost/
+              depends: Symfony
+              shortDebugResponse: 300
         - \App\Tests\Helper\Functional
