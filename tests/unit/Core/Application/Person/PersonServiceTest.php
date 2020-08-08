@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\App\Core\Application\Person;
+namespace App\Tests\Core\Application\Person;
 
 use App\Core\Application\Person\PersonService;
 use App\Core\Application\Person\Query\FindByNameQuery;
