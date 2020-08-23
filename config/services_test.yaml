@@ -1,0 +1,3 @@
+services:
+    App\Core\Domain\Person\PersonRepositoryInterface:
+        alias: 'App\Core\Infrastructure\InMemory\PersonRepository'

@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route(path="/api/v1/hello/{name}", name="hello", methods="GET" )
  */
-class Hello
+class HelloAction
 {
     private $personService;
 

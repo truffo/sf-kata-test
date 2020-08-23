@@ -3,16 +3,14 @@
 
 namespace App\Core\Domain\Person;
 
-
 class Person
 {
-
+    private int $id;
     private string $firstname;
     private string $lastname;
 
     public function __construct(string $firstname, string $lastname)
     {
-
         $this->firstname = $firstname;
         $this->lastname = $lastname;
     }

@@ -1,0 +1,71 @@
+@startuml
+
+    package "Presentation" {
+
+        class ConferenceCreate
+        class ConferenceUpdate
+        class ConferenceDelete
+
+        class ConferencePushComment
+
+        class ConferenceRead
+        class ConferenceSearch
+        class ConferenceList
+
+    }
+
+
+    package "Application" {
+        ConferenceCreate -o ConferenceCreateCommand
+        ConferenceCreateCommand --o  ConferenceCreateHandler
+
+        ConferenceUpdate -o ConferenceUpdateCommand
+        ConferenceUpdateCommand --o  ConferenceUpdateHandler
+
+        ConferenceDelete -o ConferenceDeleteCommand
+        ConferenceDeleteCommand --o  ConferenceDeleteHandler
+
+        ConferencePushComment -o ConferencePushCommentCommand
+        ConferencePushCommentCommand --o  ConferencePushCommentHandler
+
+        ConferencePushCommentHandler <-- ConferenceCommentSpamCheckerCommand
+        ConferenceCommentSpamCheckerCommand --o  ConferenceCommentSpamCheckerHandler
+
+        ConferenceRead --o ConferenceReadQuery
+        ConferenceReadQuery --o ConferenceReadHandler
+
+        ConferenceSearch --o ConferenceSearchQuery
+        ConferenceSearchQuery --o ConferenceSearchHandler
+
+        ConferenceList --o ConferenceListQuery
+        ConferenceListQuery --o ConferenceListHandler
+    }
+
+    package "Domain" {
+        interface ConferenceRepositoryInterface
+        ConferenceRepositoryInterface --- ConferenceCreateHandler
+        ConferenceRepositoryInterface --- ConferenceUpdateHandler
+        ConferenceRepositoryInterface --- ConferenceDeleteHandler
+        ConferenceRepositoryInterface --- ConferencePushCommentHandler
+        ConferenceRepositoryInterface --- ConferenceReadHandler
+        ConferenceRepositoryInterface --- ConferenceSearchHandler
+        ConferenceRepositoryInterface --- ConferenceListHandler
+
+        interface SpamcheckerGatewayInterface
+        SpamcheckerGatewayInterface --- ConferenceCommentSpamCheckerHandler
+        class Conference
+        Conference *-- ConferenceId
+
+        class Comment
+    }
+
+
+    package "Infrastructure" {
+        class DoctrineConferenceRepository implements ConferenceRepositoryInterface
+        class InMemoryConferenceRepository implements ConferenceRepositoryInterface
+        class ASkimetSpamchecker implements SpamcheckerGatewayInterface
+    }
+
+
+
+@enduml

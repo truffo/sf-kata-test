@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Core\Application\Person;
+namespace Unit\Core\Application\Person;
 
 use App\Core\Application\Person\PersonService;
 use App\Core\Application\Person\Query\FindByNameQuery;
@@ -22,6 +22,9 @@ class PersonServiceTest extends \Codeception\Test\Unit
     {
     }
 
+    /**
+     * @group stub
+     */
     public function testFindByNameStub()
     {
         $personRepository = new InMemory\PersonRepository();
@@ -34,6 +37,9 @@ class PersonServiceTest extends \Codeception\Test\Unit
         $this->tester->assertEquals('Peter Pan', $result->fullname());
     }
 
+    /**
+     * @group mock
+     */
     public function testFindByNameMock()
     {
         $personRepository = $this->createMock(\App\Core\Domain\Person\PersonRepositoryInterface::class);

@@ -3,7 +3,6 @@
 
 namespace App\Core\Application\Person\Query;
 
-
 class FindByNameQuery
 {
     private $name;

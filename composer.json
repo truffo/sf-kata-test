@@ -23,6 +23,8 @@
         "codeception/module-phpbrowser": "^1.0",
         "codeception/module-rest": "^1.2",
         "codeception/module-symfony": "^1.1",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "fzaninotto/faker": "^1.9",
         "phpunit/php-code-coverage": "8.0.*"
     },
     "config": {

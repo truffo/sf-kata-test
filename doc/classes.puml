@@ -1,0 +1,66 @@
+@startuml
+
+scale 20 width
+
+package "Presentation" {
+
+    class HelloAction
+    class CreateAction
+}
+
+package "Application" {
+    class ApplicationService implements ApplicationServiceInterface
+    interface ApplicationServiceInterface
+
+    class PersonCreateCommand
+
+    class FindByNameQuery
+
+    HelloAction --> FindByNameQuery
+    HelloAction --> ApplicationServiceInterface
+    CreateAction --> PersonCreateCommand
+    CreateAction --> ApplicationServiceInterface
+    ApplicationServiceInterface --> FindByNameQuery
+    ApplicationServiceInterface --> PersonCreateCommand
+
+}
+
+package "Domain" {
+    class Person
+    interface PersonRepositoryInterface
+    interface WeatherGatewayInterface
+    PersonRepositoryInterface --> Person
+    PersonCreateCommand  --> Person
+    FindByNameQuery --> Person
+    Person o-- Adresse
+    ApplicationService --> PersonRepositoryInterface
+
+}
+package "Infrastructure" {
+    class DoctrinePersonRepository implements PersonRepositoryInterface
+    class InMemoryRepository implements PersonRepositoryInterface
+    class RedisRepository implements PersonRepositoryInterface
+    class APIWeatherGateway implements WeatherGatewayInterface
+    class FakeAPIWeatherGateway implements WeatherGatewayInterface
+    DoctrinePersonRepository *-- Person
+    InMemoryRepository *-- Person
+    RedisRepository *-- Person
+}
+
+package "Postgres" <<Database>> {
+
+    DoctrinePersonRepository ... Postgres
+}
+
+package "Redis" <<Database>> {
+    RedisRepository ... Redis
+}
+
+package "API" <<Cloud>> {
+    APIWeatherGateway ... WeatherAPI
+}
+
+
+
+
+@enduml

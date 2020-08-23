@@ -1,8 +1,9 @@
-<?php namespace App\Tests\Core\Presentation\Action\Api;
+<?php
+namespace Unit\Core\Prestation\Action\API;
 
 use App\Core\Application\Person\PersonServiceInterface;
 use App\Core\Domain\Person\Person;
-use App\Core\Presentation\Action\Api\Hello;
+use App\Core\Presentation\Action\Api\HelloAction;
 use Symfony\Component\HttpFoundation\Response;
 
 class HelloTest extends \Codeception\Test\Unit
@@ -11,7 +12,7 @@ class HelloTest extends \Codeception\Test\Unit
      * @var \App\Tests\UnitTester
      */
     protected $tester;
-    
+
     protected function _before()
     {
     }
@@ -20,11 +21,10 @@ class HelloTest extends \Codeception\Test\Unit
     {
     }
 
-    // tests
     public function testHello()
     {
         $service = $this->createMock(PersonServiceInterface::class);
-        $action = new Hello($service);
+        $action = new HelloAction($service);
         $result = $action();
 
         $this->tester->assertInstanceOf(Response::class, $result);
@@ -40,8 +40,7 @@ class HelloTest extends \Codeception\Test\Unit
             ->method('findByName')
             ->willReturn(new Person('Peter', 'Pan'));
 
-        $action = new Hello($service);
-
+        $action = new HelloAction($service);
         $result = $action('Pan');
 
         $this->tester->assertInstanceOf(Response::class, $result);
